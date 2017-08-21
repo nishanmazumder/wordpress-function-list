@@ -630,9 +630,58 @@ function custom_breadcrumbs() {
     color:#ccc;
 }
 
-// Remove
+							// Get all category name in loop
 
-// Remove
+							$categories = get_categories( array(
+									'orderby' => 'name',
+									'order'   => 'ASC'
+								) );
+								 
+								foreach( $categories as $category ) {
+									$category_link = sprintf( 
+										'<a href="%1$s" alt="%2$s">%3$s</a>',
+										esc_url( get_category_link( $category->term_id ) ),
+										esc_attr( sprintf( __( 'View all posts in %s', 'textdomain' ), $category->name ) ),
+										esc_html( $category->name )
+									);
+									 
+									echo '<li class="blog-category col-12 col-md-4">' . sprintf( esc_html__( '%s', 'textdomain' ), $category_link ) . '</li> ';
+								} 
+								
+							// Get all category slug  in loop	
+
+								//get only parents
+								$args = array('orderby' => 'name','order' => 'ASC','parent' => 0);
+								$Parent_categories = get_categories($args);
+
+								foreach($Parent_categories as $category) { 
+									echo '<li class="blog-category col-12 col-md-4"><a href="'.get_category_link( $category->term_id ).'">'.$category->category_nicename.'</a><br/>';
+									
+									//get all children of this category
+									$args = array('orderby' => 'name','order' => 'ASC','parent' => $category->term_id);
+									$Child_categories = get_categories($args);
+									foreach ($Child_categories as $c){
+										echo '<span class="cat-child"><a href="'.get_category_link( $c->term_id ).'">'.$c->category_nicename.'</a></span>  ';
+									}
+									echo '</li>';
+								}					
+
+							// Get features post title by category "Features Post"
+
+
+							$posts = new WP_Query();
+							$posts->query( "category_name='{feature-article}'&posts_per_page=6" );
+							if($posts->have_posts()) :
+								while ($posts->have_posts()) : $posts->the_post(); ?>
+									<li>
+										<a href="<?php the_permalink(); ?>" target="_blank" rel="noopener" data-wpel-link="internal">
+											<img class="bullet-list-img" src="<?php echo $ts_theme_option['ts_feature_post_icon']['url'];?>" alt="Bullet list"/> <?php the_title(); ?>
+										</a>
+									</li>
+								<?php endwhile;        
+							endif;
+							wp_reset_postdata();
+						
 
 // Remove
 
