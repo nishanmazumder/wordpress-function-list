@@ -683,6 +683,31 @@ function custom_breadcrumbs() {
 							wp_reset_postdata();
 						
 
+// Change the menu item labels
+function change_post_menu_label_post() {
+  global $menu;
+  global $submenu;
+  $menu[5][0] = 'Short Answer';
+  $submenu['edit.php'][5][0] = 'Short Answer';
+  $submenu['edit.php'][10][0] = 'Add Article';
+  echo '';
+  
+}
+add_action( 'admin_menu', 'change_post_menu_label_post' );
+ 
+// Change the menu item labels
+function change_post_menu_label_page() {
+  global $menu;
+  global $submenu;
+  $menu[20][0] = 'Long Answer';
+  $submenu['edit.php'][5][0] = 'Add Article';
+  $submenu['edit.php'][10][0] = 'Add New Article';
+  echo '';
+}
+add_action( 'admin_menu', 'change_post_menu_label_page' );
+ 
+
+
 // Remove
 
 // Remove
