@@ -2,6 +2,30 @@ This functions are only for my personal note. Copy form - Wpbeginner (http://www
 
 <?php
 
+//Customizr Api
+
+function nm_customize_setup($wp_customize)
+{
+    
+	$wp_customize->add_setting('nm_term_text');
+	
+	$wp_customize->add_section('nm_terms_section', [
+		'title' => 'Extra Terms & condition ',
+		'priority' => 1
+	]); 
+	
+	$wp_customize->add_control('mys_header_title_ctrl', [
+        'label' => 'Extra condition',
+        'section' => 'nm_terms_section',
+        'settings' => 'nm_term_text',
+        'type' => 'text'
+    ]); 
+	
+	
+}
+add_action('customize_register', 'nm_customize_setup'); 
+
+
 // Remove WordPress Version Number
 
 function wpb_remove_version() {
