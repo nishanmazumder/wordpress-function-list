@@ -33,7 +33,15 @@ return '';
 }
 add_filter('the_generator', 'wpb_remove_version');
 
+// Background Image set for Inner page
 
+<?php $nmbackgroundImg = wp_get_attachment_image_src( get_post_thumbnail_id($post->ID), 'full' );?>
+          
+  <div class="header-wrap" style="background: url('<?php echo $nmbackgroundImg[0]; ?>') no-repeat;">
+     <header class="entry-header">
+    <h1 class="entry-title"><?php the_title(); ?></h1>
+     </header>
+  </div>  
 
 // Add a Custom Dashboard Logo
 
