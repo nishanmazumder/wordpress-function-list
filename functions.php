@@ -2,6 +2,16 @@ This functions are only for my personal note. Copy form - Wpbeginner (http://www
 
 <?php
 
+function import_scripts_and_styles() {
+// To enqueue style.css
+wp_enqueue_style( ‘style.css’, get_stylesheet_directory_uri() . ‘/assets/css/style.css’, array(), time(), false );
+// To enqueue custom-script.js
+wp_enqueue_script( ‘custom-js’, get_stylesheet_directory_uri() . ‘/assets/js/custom-script.js’, array(), ”, true );
+}
+add_action(‘wp_enqueue_scripts’, ‘import_scripts_and_styles’);
+
+
+
 //Customizr Api
 
 function nm_customize_setup($wp_customize)
