@@ -11,6 +11,13 @@ wp_enqueue_script( ‘custom-js’, get_stylesheet_directory_uri() . ‘/assets/
 add_action(‘wp_enqueue_scripts’, ‘import_scripts_and_styles’);
 
 
+add_action('wp_enqueue_scripts', 'forex_calculator');
+function forex_calculator() {
+    wp_register_style( 'bootcss', 'https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css' );
+    wp_enqueue_style( 'bootcss' );
+    wp_enqueue_script( 'bootjs', 'https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js', array( 'jquery' ) );
+}
+
 
 //Customizr Api
 
