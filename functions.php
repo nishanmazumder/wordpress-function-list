@@ -2,6 +2,18 @@ This functions are only for my personal note. Copy form - Wpbeginner (http://www
 
 <?php
 
+// Custom Mime Types - fonts
+function nm_allow_font_mime_types($mimes) {
+  $mimes['eot']   = 'application/vnd.ms-fontobject';
+  $mimes['woff']  = 'application/font-woff'; 
+  $mimes['otf'] = 'application/font-sfnt';
+  $mimes['svg']   = 'image/svg+xml';
+
+  return $mimes;
+}
+add_filter('upload_mimes', 'nm_allow_font_mime_types'); 
+
+
 function import_scripts_and_styles() {
 // To enqueue style.css
 wp_enqueue_style( ‘style.css’, get_stylesheet_directory_uri() . ‘/assets/css/style.css’, array(), time(), false );
